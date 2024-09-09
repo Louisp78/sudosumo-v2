@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import { redirect } from "next/navigation";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -17,6 +16,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     // @ts-ignore cause it's in the official way to do it in the documentation
     async jwt({ token, account }) {
+      console.log("JWT callback is invoked here");
       if (account) {
         return {
           ...token,

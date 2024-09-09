@@ -1,13 +1,17 @@
 import GoogleSignInBtn from "@/app/components/GoogleSignInBtn";
 import { auth } from "../auth";
 import { redirect } from "next/navigation";
+import { registerUser } from "../lib/actions";
 
 //TODO: Update with the theme
 export default async function Page() {
     const session = await auth();
-    if (session?.id_token)
+    if (session?.id_token) {
+        registerUser()
         redirect('/')
+    }
 
+    //TODO: add a mandatory unique username input
     return (
         <main className="flex justify-center">
             <section className="relative flex flex-col items-center justify-center h-screen">

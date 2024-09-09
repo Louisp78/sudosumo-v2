@@ -1,31 +1,23 @@
 import Link from "next/link";
-import { SoupIcon, FlameIcon, GithubIcon, HeartIcon, MenuIcon } from 'lucide-react'
+import { SoupIcon, GithubIcon, HeartIcon } from 'lucide-react'
+import AppBar from "../components/AppBar";
+import { auth } from "../auth";
+import { getUser } from "../lib/actions";
 
-export default function MainLayout({
+export default async function MainLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  //TODO: style the nav appbar
+
+  const session = await auth();
+  const imageSrc = session?.user?.image;
+
+  const user = await getUser();
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-400 to-red-500 flex flex-col">
-      <header className="bg-white bg-opacity-90 backdrop-blur-sm shadow-md py-4 px-6">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-orange-700 font-japanese flex items-center">
-            <SoupIcon className="mr-2 text-yellow-500" />
-            SudoSumo
-          </h1>
-          <nav className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <FlameIcon className="text-red-500" />
-              <span className='text-xl font-semibold text-orange-600'>5</span>
-            </div>
-            <button className="text-orange-600 hover:text-orange-700">
-              <MenuIcon />
-            </button>
-          </nav>
-        </div>
-      </header>
+    <>
+      <AppBar avatarUrl={imageSrc} lifes={user?.lifes || 0} />
       {children}
       <footer className="w-full bg-white bg-opacity-90 backdrop-blur-sm shadow-xl py-4 px-6 mt-auto">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -35,13 +27,14 @@ export default function MainLayout({
           </p>
           <Link
             className="rounded-lg border-2 border-orange-500 px-4 py-2 hover:bg-orange-500 font-medium text-orange-700 hover:text-white transition-colors flex items-center"
-            href="#"
+            href="https://github.com/Louisp78/sudosumo-v2"
+            target="_blank"
           >
             <GithubIcon className="mr-2 w-5 h-5" />
             More on Github
           </Link>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
