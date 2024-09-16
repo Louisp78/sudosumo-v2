@@ -1,14 +1,14 @@
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import React, { useEffect, useState } from "react";
-import SSButton from "./SSButton";
-import { DialogProps } from "@radix-ui/react-dialog";
-import { getUser } from "../service/user";
-import { UserDTO } from "../service/dto/UserDTO";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import React, { useEffect, useState } from "react"
+import SSButton from "./SSButton"
+import { DialogProps } from "@radix-ui/react-dialog"
+import { getUser } from "../service/user"
+import { UserDTO } from "../service/dto/UserDTO"
 
 export default function InvalidPuzzleDialog({ onContinue, ...props }: {
     onContinue: () => void;
 } & DialogProps) {
-    const [user, setUser] = useState<UserDTO>();
+    const [user, setUser] = useState<UserDTO>()
     useEffect(() => {
         getUser().then((user) => user ? setUser(user) : null)
     }, [setUser])

@@ -1,33 +1,33 @@
 'use client'
-import { useEffect, useState } from "react";
-import { Card } from "../components/ui/card";
+import { useEffect, useState } from "react"
+import { Card } from "../components/ui/card"
 
 export default function NoSpoonLeftPage() {
-    const [timeLeft, setTimeLeft] = useState<{ hours: number; minutes: number; seconds: number }>(timeUntilMidnight());
+    const [timeLeft, setTimeLeft] = useState<{ hours: number; minutes: number; seconds: number }>(timeUntilMidnight())
 
 
     // Function to calculate time until midnight
     function timeUntilMidnight(): { hours: number; minutes: number; seconds: number } {
-        const now = new Date();
-        const midnight = new Date(now);
-        midnight.setHours(24, 0, 0, 0); // Set to next midnight
+        const now = new Date()
+        const midnight = new Date(now)
+        midnight.setHours(24, 0, 0, 0) // Set to next midnight
 
-        const difference = midnight.getTime() - now.getTime();
+        const difference = midnight.getTime() - now.getTime()
 
-        const hours = Math.floor(difference / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        const hours = Math.floor(difference / (1000 * 60 * 60))
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000)
 
-        return { hours, minutes, seconds };
+        return { hours, minutes, seconds }
     }
     useEffect(() => {
         const intervalId = setInterval(() => {
-            setTimeLeft(timeUntilMidnight());
-        }, 1000); // Update every second
+            setTimeLeft(timeUntilMidnight())
+        }, 1000) // Update every second
 
         // Clear interval on component unmount
-        return () => clearInterval(intervalId);
-    }, []);
+        return () => clearInterval(intervalId)
+    }, [])
     return (
         <main className="flex w-full justify-center items-center flex-grow">
             <Card className="p-5">

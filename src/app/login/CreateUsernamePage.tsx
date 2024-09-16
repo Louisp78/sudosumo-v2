@@ -1,14 +1,14 @@
 'use client'
-import { Card } from "../components/ui/card";
-import { Button } from "../components/ui/button";
-import { registerUser } from "../service/user";
-import { useState } from "react";
-import { ArrowRight } from "lucide-react";
-import UsernameInput from "../components/UsernameInput";
+import { Card } from "../components/ui/card"
+import { Button } from "../components/ui/button"
+import { registerUser } from "../service/user"
+import { useState } from "react"
+import { ArrowRight } from "lucide-react"
+import UsernameInput from "../components/UsernameInput"
 
 export default function CreateUsernamePage() {
 
-    const [isFormValid, setIsFormValid] = useState<boolean>(false);
+    const [isFormValid, setIsFormValid] = useState<boolean>(false)
 
     return (
         <main className="flex flex-grow justify-center items-center">
@@ -26,5 +26,5 @@ export default function CreateUsernamePage() {
                 </form>
             </Card>
         </main>
-    );
+    )
 }

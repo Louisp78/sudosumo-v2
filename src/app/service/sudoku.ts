@@ -1,8 +1,8 @@
-"use server";
+"use server"
 
-import { ResponseDTO } from "./dto/ResponseDTO";
-import { SudokuDTO } from "./dto/SudokuDTO";
-import { fetchWrapper } from "./utils";
+import { ResponseDTO } from "./dto/ResponseDTO"
+import { SudokuDTO } from "./dto/SudokuDTO"
+import { fetchWrapper } from "./utils"
 
 export async function getSudoku({
   regenerate = "true",
@@ -12,8 +12,8 @@ export async function getSudoku({
       key: "regenerate",
       value: regenerate,
     },
-  ]);
-  if (response) return { object: response.json(), status: response.status };
+  ])
+  if (response) return { object: response.json(), status: response.status }
 }
 
 export async function solveSudoku(solution: string) {
@@ -25,6 +25,6 @@ export async function solveSudoku(solution: string) {
     body: JSON.stringify({
       solution: solution,
     }),
-  });
-  if (response) return { status: response.status };
+  })
+  if (response) return { status: response.status }
 }

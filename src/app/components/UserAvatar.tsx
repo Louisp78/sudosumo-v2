@@ -1,5 +1,5 @@
-import clsx from "clsx";
-import Image, { ImageProps } from "next/image";
+import clsx from "clsx"
+import Image, { ImageProps } from "next/image"
 
 export default function UserAvatar({ size, avatarUrl, className, ...rest }:
     { size: number, avatarUrl: string | null | undefined, className: string, rest?: ImageProps }) {

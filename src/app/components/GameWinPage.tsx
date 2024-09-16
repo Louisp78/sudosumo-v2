@@ -1,8 +1,8 @@
 'use client'
 
 import { Card } from "@/app/components/ui/card"
-import { SoupIcon } from "lucide-react";
-import { Button } from "@/app/components/ui/button";
+import { SoupIcon } from "lucide-react"
+import { Button } from "@/app/components/ui/button"
 export default function GameWinPage(props: { onClose: () => void, noodles: number }) {
     return (
         <main className="w-full flex-grow flex flex-col items-center justify-center">

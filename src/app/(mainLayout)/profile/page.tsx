@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export default async function ProfilePage() {
 
-  const user = await getUser();
+  const user = await getUser()
 
   return (
     <main className="flex flex-col flex-grow items-center justify-between w-screen pb-40 bg-gradient-to-br from-yellow-400 to-red-500 p-8">

@@ -14,37 +14,37 @@ import { loseLife } from '../service/user'
 import { SudokuDTO } from '../service/dto/SudokuDTO'
 
 export default function PuzzlePage() {
-  const isDev = process.env.NEXT_PUBLIC_ENV! === 'development';
+  const isDev = process.env.NEXT_PUBLIC_ENV! === 'development'
 
-  const [puzzle, setPuzzle] = useState<string[]>(Array(81).fill('-'));
+  const [puzzle, setPuzzle] = useState<string[]>(Array(81).fill('-'))
   const setPuzzleWithLocal = (puzzle: string[]) => {
-    localStorage.setItem('puzzle', JSON.stringify(puzzle));
-    return setPuzzle(puzzle);
+    localStorage.setItem('puzzle', JSON.stringify(puzzle))
+    return setPuzzle(puzzle)
   }
-  const [prevPuzzle, setPrevPuzzle] = useState<string[] | undefined>(undefined);
+  const [prevPuzzle, setPrevPuzzle] = useState<string[] | undefined>(undefined)
   const setPrevPuzzleWithLocal = (prevPuzzle: string[] | undefined) => {
     if (prevPuzzle === undefined)
       localStorage.removeItem('prevPuzzle')
     else
-      localStorage.setItem('prevPuzzle', JSON.stringify(prevPuzzle));
-    setPrevPuzzle(prevPuzzle);
+      localStorage.setItem('prevPuzzle', JSON.stringify(prevPuzzle))
+    setPrevPuzzle(prevPuzzle)
   }
-  const [errorMessage, setErrorMessage] = useState<string | undefined>();
-  const [isSolved, setIsSolved] = useState<boolean>(false);
-  const [validPuzzle, setValidPuzzle] = useState<boolean>(true);
-  const [iniSudoku, setIniSudoku] = useState<SudokuDTO>();
+  const [errorMessage, setErrorMessage] = useState<string | undefined>()
+  const [isSolved, setIsSolved] = useState<boolean>(false)
+  const [validPuzzle, setValidPuzzle] = useState<boolean>(true)
+  const [iniSudoku, setIniSudoku] = useState<SudokuDTO>()
   const setIniSudokuWithLocal = (iniSudoku: SudokuDTO) => {
-    localStorage.setItem('iniSudoku', JSON.stringify(iniSudoku));
+    localStorage.setItem('iniSudoku', JSON.stringify(iniSudoku))
     setIniSudoku(iniSudoku)
   }
 
   async function puzzleGeneration() {
-    const response = await getSudoku({ regenerate: "false" });
+    const response = await getSudoku({ regenerate: "false" })
     if (response) {
       if (response.status === 200) {
         const sudoku = await response.object
-        setPuzzleWithLocal(puzzleFormatToDisplay(sudoku.puzzle));
-        setIniSudokuWithLocal(sudoku);
+        setPuzzleWithLocal(puzzleFormatToDisplay(sudoku.puzzle))
+        setIniSudokuWithLocal(sudoku)
       } else if (response.status === 400) {
         setErrorMessage("No life left")
       } else if (response.status === 404) {
@@ -56,34 +56,34 @@ export default function PuzzlePage() {
   }
 
   async function solve() {
-    const response = await solveSudoku(puzzleFormatToRequest(puzzle));
+    const response = await solveSudoku(puzzleFormatToRequest(puzzle))
     if (response) {
       if (response.status === 200) {
-        return true;
+        return true
       }
       if (response.status === 500) {
-        return false;
+        return false
       }
     }
-    return false;
+    return false
   }
 
   // For localstorage
   useEffect(() => {
-    const iniSudokuSto = localStorage.getItem('iniSudoku');
+    const iniSudokuSto = localStorage.getItem('iniSudoku')
     if (iniSudokuSto) {
       setIniSudoku(JSON.parse(iniSudokuSto) as SudokuDTO)
     } else {
       puzzleGeneration()
     }
 
-    const puzzleSto = localStorage.getItem('puzzle');
+    const puzzleSto = localStorage.getItem('puzzle')
     if (puzzleSto)
       setPuzzle(JSON.parse(puzzleSto) as string[])
     else if (iniSudoku) {
-      setPuzzleWithLocal(puzzleFormatToDisplay(iniSudoku?.puzzle));
+      setPuzzleWithLocal(puzzleFormatToDisplay(iniSudoku?.puzzle))
     }
-    const prevPuzzleSto = localStorage.getItem('prevPuzzle');
+    const prevPuzzleSto = localStorage.getItem('prevPuzzle')
     if (prevPuzzleSto)
       setPrevPuzzle(JSON.parse(prevPuzzleSto) as string[])
   }, [])
@@ -101,14 +101,14 @@ export default function PuzzlePage() {
   }, [puzzle])
 
   async function updatePuzzle(index: number, newValue: string) {
-    setPrevPuzzleWithLocal(puzzle);
+    setPrevPuzzleWithLocal(puzzle)
     const newPuzzle = puzzle.map((elt, i) => i === index ? newValue : elt)
     setPuzzleWithLocal(newPuzzle)
   }
 
   const indexOfSeparation = (index: number) => (index >= 9 * 3 && index < 9 * 4) ||
     (index >= 9 * 6 && index < 9 * 7) ||
-    (index >= 9 * 9 && index < 9 * 10);
+    (index >= 9 * 9 && index < 9 * 10)
 
   const [selectedNb, selectNb] = useState<number>(1)
 
@@ -117,7 +117,7 @@ export default function PuzzlePage() {
     if (iniSudoku?.puzzle[selectedCell] === "-") {
       const tempPuzzle = puzzle.map((elt, i) => i === selectedCell ? selectedNb.toString() : elt)
       if (checkPuzzle(tempPuzzle) === false) {
-        loseLife();
+        loseLife()
         return setValidPuzzle(false)
       }
       await updatePuzzle(selectedCell, selectedNb.toString())
@@ -125,7 +125,7 @@ export default function PuzzlePage() {
   }
 
   async function handleSolve(data: FormData) {
-    const response = await solveSudoku(data.get('solution')?.toString() ?? '');
+    const response = await solveSudoku(data.get('solution')?.toString() ?? '')
     if (response) {
       if (response.status === 200) {
         setIsSolved(true)
@@ -137,14 +137,14 @@ export default function PuzzlePage() {
 
   function handleClear() {
     if (iniSudoku?.puzzle) {
-      setPuzzleWithLocal(puzzleFormatToDisplay(iniSudoku.puzzle));
+      setPuzzleWithLocal(puzzleFormatToDisplay(iniSudoku.puzzle))
     }
   }
 
   function handleUndo() {
     if (prevPuzzle)
-      setPuzzleWithLocal(prevPuzzle);
-    setPrevPuzzleWithLocal(undefined);
+      setPuzzleWithLocal(prevPuzzle)
+    setPrevPuzzleWithLocal(undefined)
   }
 
   if (isSolved)

@@ -1,11 +1,11 @@
-import { auth } from "../auth";
-import { redirect } from "next/navigation";
-import { getUser } from "../service/user";
-import CreateUsernamePage from "./CreateUsernamePage";
-import LoginPage from "./LoginPage";
+import { auth } from "../auth"
+import { redirect } from "next/navigation"
+import { getUser } from "../service/user"
+import CreateUsernamePage from "./CreateUsernamePage"
+import LoginPage from "./LoginPage"
 
 export default async function Page() {
-    const [session, user] = await Promise.all([auth(), getUser()]);
+    const [session, user] = await Promise.all([auth(), getUser()])
 
     if (session?.id_token && user?.username != null) {
         redirect("/")

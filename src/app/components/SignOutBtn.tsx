@@ -1,11 +1,11 @@
 'use client'
-import { signOutAction } from "../service/actions";
-import { Button } from "./ui/button";
+import { signOutAction } from "../service/actions"
+import { Button } from "./ui/button"
 
 export default function SignOutBtn() {
     function handleSignOut() {
-        localStorage.clear();
-        signOutAction();
+        localStorage.clear()
+        signOutAction()
     }
     return (
         <Button variant={"outline"}

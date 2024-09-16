@@ -1,18 +1,18 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { debounce } from "lodash";
-import { useEffect, useState } from "react";
-import { isUsernameExist } from "../service/user";
-import { CheckCircle2Icon, CircleAlertIcon } from "lucide-react";
-import clsx from "clsx";
-import React from "react";
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { debounce } from "lodash"
+import { useEffect, useState } from "react"
+import { isUsernameExist } from "../service/user"
+import { CheckCircle2Icon, CircleAlertIcon } from "lucide-react"
+import clsx from "clsx"
+import React from "react"
 
 interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     onValid?: () => void
 }
 
 const UsernameInput: React.FC<CustomInputProps> = ({ onValid, ...props }) => {
-    const [isUsernameValid, setIsUsernameValid] = useState<boolean | undefined>(undefined);
+    const [isUsernameValid, setIsUsernameValid] = useState<boolean | undefined>(undefined)
 
     useEffect(() => {
         if (isUsernameValid) {
@@ -23,13 +23,13 @@ const UsernameInput: React.FC<CustomInputProps> = ({ onValid, ...props }) => {
     const handleChange = debounce(async (query: string) => {
         if (query === props.defaultValue) return setIsUsernameValid(undefined)
         if (query.length <= 3) return setIsUsernameValid(undefined)
-        const response: boolean = await isUsernameExist(query);
-        setIsUsernameValid(response);
-    }, 1000);
+        const response: boolean = await isUsernameExist(query)
+        setIsUsernameValid(response)
+    }, 1000)
 
     const renderIcon = () => {
         if (isUsernameValid == null)
-            return null;
+            return null
         else if (isUsernameValid)
             return <CheckCircle2Icon />
         else
@@ -55,4 +55,4 @@ const UsernameInput: React.FC<CustomInputProps> = ({ onValid, ...props }) => {
     )
 }
 
-export default UsernameInput;
+export default UsernameInput

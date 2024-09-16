@@ -1,16 +1,16 @@
 'use client'
 
-import { Button } from "@/app/components/ui/button";
-import { Card } from "@/app/components/ui/card";
-import UsernameInput from "@/app/components/UsernameInput";
-import { UserDTO } from "@/app/service/dto/UserDTO";
-import { getUser, updateUserInfos } from "@/app/service/user";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/app/components/ui/button"
+import { Card } from "@/app/components/ui/card"
+import UsernameInput from "@/app/components/UsernameInput"
+import { UserDTO } from "@/app/service/dto/UserDTO"
+import { getUser, updateUserInfos } from "@/app/service/user"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 
 export default function EditProfilePage() {
     const router = useRouter()
