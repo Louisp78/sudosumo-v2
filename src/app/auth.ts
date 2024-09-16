@@ -13,10 +13,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
     // @ts-ignore cause it's in the official way to do it in the documentation
     async jwt({ token, account }) {
-      console.log("JWT callback is invoked here");
       if (account) {
         return {
           ...token,
@@ -30,7 +32,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       } else {
         // Subsequent logins, but the `access_token` has expired, try to refresh it
         if (!token.refresh_token) throw new TypeError("Missing refresh_token");
-
         try {
           const response = await fetch("https://oauth2.googleapis.com/token", {
             method: "POST",
@@ -42,16 +43,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }),
           });
           const tokensOrError = await response.json();
-
           if (!response.ok) throw tokensOrError;
+          // eslint-disable-next-line no-console
           console.info("Token has been refreshed !");
           const newTokens = tokensOrError as {
             access_token: string;
+            id_token: string;
             expires_in: number;
             refresh_token?: string;
           };
 
           token.access_token = newTokens.access_token;
+          token.id_token = newTokens.id_token;
           token.expires_at = Math.floor(
             Date.now() / 1000 + newTokens.expires_in
           );
@@ -60,17 +63,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             token.refresh_token = newTokens.refresh_token;
           return token;
         } catch (error) {
+          // eslint-disable-next-line no-console
           console.error("Error refreshing access_token", error);
-          // If we fail to refresh the token, return an error so we can handle it on the page
           token.error = "RefreshTokenError";
           return token;
         }
       }
     },
-    session: ({ session, token }) => {
+    session: async ({ session, token }) => {
       session.error = token.error;
       session.id_token = token.id_token;
       return session;
+    },
+    signIn: async ({ profile }) => {
+      //Implement whitelist here
+      return true;
     },
   },
 });

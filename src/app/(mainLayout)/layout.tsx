@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SoupIcon, GithubIcon, HeartIcon } from 'lucide-react'
 import AppBar from "../components/AppBar";
 import { auth } from "../auth";
-import { getUser } from "../lib/actions";
+import { getUser } from "../service/user";
 
 export default async function MainLayout({
   children,

@@ -1,3 +1,4 @@
+//TODO: delete me
 interface BaseProps {
-    className?: string
+  className?: string;
 }

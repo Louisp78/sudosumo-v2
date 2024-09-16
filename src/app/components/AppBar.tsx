@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import UserAvatar from "./UserAvatar";
 import { usePathname } from "next/navigation";
+import { GiSpoon } from "react-icons/gi";
 
 export default function AppBar(props: { avatarUrl?: string | null, lifes: number }) {
     const pathname = usePathname();
@@ -25,8 +26,8 @@ export default function AppBar(props: { avatarUrl?: string | null, lifes: number
                         </Link>
                     }
                     <div className="flex items-center space-x-2">
-                        <FlameIcon className="text-red-500" />
-                        <span className='text-xl font-semibold text-orange-600'>{props.lifes}</span>
+                        <GiSpoon className="text-red-500" size={23} />
+                        <span className='text-xl font-semibold text-red-500'>{props.lifes}</span>
                     </div>
                     <Link href={"/profile"}>
                         <UserAvatar size={50} className="w-10 h-10" avatarUrl={props.avatarUrl} />
