@@ -41,7 +41,6 @@ export default function EditProfilePage() {
                         <Label>Fullname</Label>
                         <Input name="name" placeholder="Fullname" defaultValue={user?.fullname} />
                     </div>
-                    {/*TODO: add the username input here */}
                     <UsernameInput name="username" placeholder="Username" onValid={() => setUsernameValid(true)} defaultValue={user?.username} />
                     <div className="flex flex-col w-full gap-1">
                         <Label>Biography</Label>
