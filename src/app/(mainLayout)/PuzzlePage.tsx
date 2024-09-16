@@ -11,6 +11,7 @@ import { Button } from '../components/ui/button'
 import SSButton from '../components/SSButton'
 import InvalidPuzzleDialog from '../components/InvalidPuzzleDialog'
 import { loseLife } from '../service/user'
+import { SudokuDTO } from '../service/dto/SudokuDTO'
 
 export default function PuzzlePage() {
   const isDev = process.env.NEXT_PUBLIC_ENV! === 'development';

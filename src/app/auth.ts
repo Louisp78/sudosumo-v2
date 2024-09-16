@@ -75,7 +75,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.id_token = token.id_token;
       return session;
     },
-    signIn: async ({ profile }) => {
+    signIn: async () => {
       //Implement whitelist here
       return true;
     },
@@ -83,6 +83,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 });
 
 declare module "next-auth" {
+  // eslint-disable-next-line no-unused-vars
   interface Session {
     error?: "RefreshTokenError";
     id_token?: string;
@@ -90,6 +91,7 @@ declare module "next-auth" {
 }
 
 declare module "@auth/core/jwt" {
+  // eslint-disable-next-line no-unused-vars
   interface JWT {
     access_token: string;
     expires_at: number;

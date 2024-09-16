@@ -1,6 +1,11 @@
 {
   "extends": "next/core-web-vitals",
   "rules": {
-    "no-console": "error"
+    "no-console": "error",
+    "eol-last": [
+      "error",
+      "always"
+    ],
+    "no-unused-vars": "error"
   }
 }

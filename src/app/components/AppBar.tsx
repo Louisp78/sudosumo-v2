@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowLeftIcon, FlameIcon, SoupIcon } from "lucide-react";
+import { ArrowLeftIcon, SoupIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import UserAvatar from "./UserAvatar";

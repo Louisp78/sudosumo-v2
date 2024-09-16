@@ -1,5 +1,7 @@
 "use server";
 
+import { ResponseDTO } from "./dto/ResponseDTO";
+import { SudokuDTO } from "./dto/SudokuDTO";
 import { fetchWrapper } from "./utils";
 
 export async function getSudoku({

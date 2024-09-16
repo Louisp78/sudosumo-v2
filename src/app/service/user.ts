@@ -2,6 +2,8 @@
 
 import { revalidateTag } from "next/cache";
 import { fetchWrapper } from "./utils";
+import { UserDTO } from "./dto/UserDTO";
+import { UpdateUserDTO } from "./dto/UpdateUserDTO";
 
 export async function registerUser(formData: FormData) {
   const username: string = formData?.get("username")?.toString() ?? "";

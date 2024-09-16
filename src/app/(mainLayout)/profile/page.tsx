@@ -5,7 +5,6 @@ import { PenIcon, AwardIcon, FlagIcon, SoupIcon } from 'lucide-react'
 import SignOutBtn from "@/app/components/SignOutBtn"
 import UserAvatar from "@/app/components/UserAvatar"
 import { getUser } from "@/app/service/user"
-import { auth } from "@/app/auth"
 import Link from "next/link"
 
 export default async function ProfilePage() {

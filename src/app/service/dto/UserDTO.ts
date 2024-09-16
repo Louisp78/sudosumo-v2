@@ -1,4 +1,4 @@
-interface UserDTO {
+export interface UserDTO {
   fullname: string;
   username: string;
   avatarUrl: string;

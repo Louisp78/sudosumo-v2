@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import SSButton from "./SSButton";
 import { DialogProps } from "@radix-ui/react-dialog";
 import { getUser } from "../service/user";
+import { UserDTO } from "../service/dto/UserDTO";
 
-type InvalidPuzzleDialog = {
+export default function InvalidPuzzleDialog({ onContinue, ...props }: {
     onContinue: () => void;
-} & DialogProps
-
-export default function InvalidPuzzleDialog({ onContinue, ...props }: InvalidPuzzleDialog) {
+} & DialogProps) {
     const [user, setUser] = useState<UserDTO>();
     useEffect(() => {
         getUser().then((user) => user ? setUser(user) : null)

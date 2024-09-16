@@ -1,7 +1,5 @@
 'use client'
 
-import Link from "next/link";
-
 import { Card } from "@/app/components/ui/card"
 import { SoupIcon } from "lucide-react";
 import { Button } from "@/app/components/ui/button";

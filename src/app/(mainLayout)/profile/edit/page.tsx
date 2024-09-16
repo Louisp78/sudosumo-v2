@@ -3,6 +3,7 @@
 import { Button } from "@/app/components/ui/button";
 import { Card } from "@/app/components/ui/card";
 import UsernameInput from "@/app/components/UsernameInput";
+import { UserDTO } from "@/app/service/dto/UserDTO";
 import { getUser, updateUserInfos } from "@/app/service/user";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

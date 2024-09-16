@@ -1,4 +1,4 @@
-interface ResponseDTO<T> {
+export interface ResponseDTO<T> {
   object: Promise<T>;
   status: number;
 }
