@@ -1,11 +1,16 @@
-import { signOut } from "../auth";
-import { signOutAction } from "../lib/actions";
-import { Button } from "./ui/button";
+'use client'
+import { signOutAction } from "../service/actions"
+import { Button } from "./ui/button"
 
-export default function SignOutBtn(props: BaseProps) {
+export default function SignOutBtn() {
+    function handleSignOut() {
+        localStorage.clear()
+        signOutAction()
+    }
     return (
-        <form action={signOutAction} className={props.className}>
-            <Button variant={"outline"} className=" border-2 border-orange-600 bg-white bg-opacity-75 text-orange-700">Log Out</Button>
-        </form>
+        <Button variant={"outline"}
+            className=" border-2 border-orange-600 bg-white bg-opacity-75 text-orange-700"
+            onClick={handleSignOut}
+        >Log Out</Button>
     )
 }

@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from "next/link"
 import { SoupIcon, GithubIcon, HeartIcon } from 'lucide-react'
-import AppBar from "../components/AppBar";
-import { auth } from "../auth";
-import { getUser } from "../lib/actions";
+import AppBar from "../components/AppBar"
+import { auth } from "../auth"
+import { getUser } from "../service/user"
 
 export default async function MainLayout({
   children,
@@ -10,10 +10,10 @@ export default async function MainLayout({
   children: React.ReactNode;
 }>) {
 
-  const session = await auth();
-  const imageSrc = session?.user?.image;
+  const session = await auth()
+  const imageSrc = session?.user?.image
 
-  const user = await getUser();
+  const user = await getUser()
 
   return (
     <>
@@ -36,5 +36,5 @@ export default async function MainLayout({
         </div>
       </footer>
     </>
-  );
+  )
 }

@@ -1,29 +1,18 @@
-import GoogleSignInBtn from "@/app/components/GoogleSignInBtn";
-import { auth } from "../auth";
-import { redirect } from "next/navigation";
-import { registerUser } from "../lib/actions";
+import { auth } from "../auth"
+import { redirect } from "next/navigation"
+import { getUser } from "../service/user"
+import CreateUsernamePage from "./CreateUsernamePage"
+import LoginPage from "./LoginPage"
 
-//TODO: Update with the theme
 export default async function Page() {
-    const session = await auth();
-    if (session?.id_token) {
-        registerUser()
-        redirect('/')
+    const [session, user] = await Promise.all([auth(), getUser()])
+
+    if (session?.id_token && user?.username != null) {
+        redirect("/")
     }
 
-    //TODO: add a mandatory unique username input
-    return (
-        <main className="flex justify-center">
-            <section className="relative flex flex-col items-center justify-center h-screen">
-                <div className="absolute top-40 flex flex-col items-center gap-5">
-                    <span className="text-5xl">🍜</span>
-                    <h1 className="text-4xl font-semibold">SudoSumo</h1>
-                </div>
-                <div className="border flex flex-col items-center px-5 py-8 rounded-lg">
-                    <h2 className="text-xl pb-5">Login</h2>
-                    <GoogleSignInBtn />
-                </div>
-            </section>
-        </main>
-    )
+    if (session?.id_token == null)
+        return (<LoginPage />)
+    else
+        return (<CreateUsernamePage />)
 }

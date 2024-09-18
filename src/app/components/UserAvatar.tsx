@@ -1,17 +1,19 @@
-import { auth } from "../auth";
-import Image from "next/image";
+import clsx from "clsx"
+import Image, { ImageProps } from "next/image"
 
-export default function UserAvatar(props: (BaseProps & { size: number; avatarUrl: string | null | undefined })) {
+export default function UserAvatar({ size, avatarUrl, className, ...rest }:
+    { size: number, avatarUrl: string | null | undefined, className: string, rest?: ImageProps }) {
 
     return (
         <>
             {/* TODO: see for image resolution with query params */}
             <Image
-                src={props.avatarUrl ?? '/next.svg'}
-                width={props.size}
-                height={props.size}
+                src={avatarUrl ?? '/next.svg'}
+                width={size}
+                height={size}
                 alt="User Avatar"
-                className={`rounded-full object-cover border-4 border-orange-400 ${props.className}`}
+                className={clsx(`rounded-full object-cover border-4 border-orange-400`, className)}
+                {...rest}
             />
         </>
     )

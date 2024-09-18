@@ -1,3 +1,0 @@
-interface BaseProps {
-    className?: string
-}
