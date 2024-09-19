@@ -1,13 +1,8 @@
-'use client'
-import { useEffect } from "react"
 import GoogleSignInBtn from "../components/GoogleSignInBtn"
 import { Card } from "../components/ui/card"
+import ClearLocalStorage from "./ClearLocalStorage"
 
 export default function LoginPage() {
-    useEffect(() => {
-        if (localStorage.length > 0)
-            localStorage.clear()
-    })
     return (
         <main className="flex flex-grow justify-center items-center flex-col w-full gap-20">
             <div className="flex flex-col items-center gap-5">
@@ -20,6 +15,7 @@ export default function LoginPage() {
                     <GoogleSignInBtn />
                 </div>
             </Card>
+            <ClearLocalStorage />
         </main>
     )
 }
