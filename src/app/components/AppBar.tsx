@@ -12,7 +12,7 @@ import { TooltipContent, TooltipTrigger } from "@radix-ui/react-tooltip"
 export default function AppBar(props: { avatarUrl?: string | null, lifes: number }) {
     const pathname = usePathname()
     return (
-        <header className="bg-white bg-opacity-90 backdrop-blur-sm shadow-md py-2 px-6">
+        <header className="bg-white bg-opacity-90 backdrop-blur-sm shadow-md py-2 px-6 z-40">
             <div className="flex justify-evenly items-center">
                 {pathname !== "/profile" && <Link href={"/"}>
                     <h1 className="text-2xl font-bold text-orange-700 font-japanese flex items-center">
