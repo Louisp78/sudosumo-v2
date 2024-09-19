@@ -2,8 +2,6 @@ import { redirect } from "next/navigation"
 import { getUser } from "../service/user"
 import NoSpoonLeftPage from "./NoSpoonLeftPage"
 import PuzzlePage from "./(PuzzlePage)/PuzzlePage"
-import PuzzlePageSkeleton from "./(PuzzlePage)/PuzzlePageSkeleton"
-import { Suspense } from "react"
 
 export default async function HomePage() {
     const user = await getUser()
@@ -11,9 +9,7 @@ export default async function HomePage() {
         redirect('/login')
     if (user?.lifes)
         return (
-            <Suspense fallback={<PuzzlePageSkeleton />}>
-                <PuzzlePage />
-            </Suspense>
+            <PuzzlePage />
         )
     else
         return <NoSpoonLeftPage />

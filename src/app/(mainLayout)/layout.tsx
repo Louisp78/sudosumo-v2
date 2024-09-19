@@ -3,6 +3,13 @@ import { SoupIcon, GithubIcon, HeartIcon } from 'lucide-react'
 import AppBar from "../components/AppBar"
 import { auth } from "../auth"
 import { getUser } from "../service/user"
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Sudosumo - Let's eat sudokus",
+  description: "SudoSumo is a dynamic and engaging Sudoku game offering puzzles for all skill levels. Solve 9x9 grids, challenge your logic, and improve your puzzle-solving skills with intuitive gameplay and sleek design. Play now on web or mobile and become a Sudoku master!",
+}
+
 
 export default async function MainLayout({
   children,
