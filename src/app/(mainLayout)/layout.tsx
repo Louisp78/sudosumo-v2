@@ -19,7 +19,7 @@ export default async function MainLayout({
     <>
       <AppBar avatarUrl={imageSrc} lifes={user?.lifes || 0} />
       {children}
-      <footer className="w-full bg-white bg-opacity-90 backdrop-blur-sm shadow-xl py-4 px-6 mt-auto">
+      <footer className="w-full bg-white bg-opacity-90 backdrop-blur-sm shadow-xl py-2 md:py-4  px-6 mt-auto">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-center text-orange-700 flex items-center">
             Made with <HeartIcon className="text-red-500 mx-1 w-5 h-5" /> and a bowl of

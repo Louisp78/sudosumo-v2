@@ -13,7 +13,7 @@ export default async function ProfilePage() {
 
   return (
     <main className="flex flex-col flex-grow items-center justify-between w-screen pb-40 bg-gradient-to-br from-yellow-400 to-red-500 p-8">
-      <Card className="relative max-w-3xl mx-auto bg-white bg-opacity-90 backdrop-blur-sm shadow-xl pt-8">
+      <Card className="w-full mx-auto md:w-[80%] lg:w-[55%]  bg-white bg-opacity-90 backdrop-blur-sm shadow-xl pt-8">
         <CardHeader className="absolute right-2 top-2">
           <Link href='/profile/edit'>
             <Button variant="outline" size="icon" className="text-orange-600 hover:text-orange-700 hover:bg-orange-100">

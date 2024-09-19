@@ -204,7 +204,7 @@ export default function PuzzlePage() {
             </li>
           ))}
         </ul>
-        <ul className='flex gap-3'>
+        <ul className='flex gap-3 w-full justify-center md:justify-start'>
           <li>
             <SSButton
               className='flex gap-1'
