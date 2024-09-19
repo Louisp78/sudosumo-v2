@@ -9,7 +9,7 @@ export default function SignOutBtn() {
     }
     return (
         <Button variant={"outline"}
-            className=" border-2 border-orange-600 bg-white bg-opacity-75 text-orange-700"
+            className="mt-10 border-2 border-orange-600 bg-white bg-opacity-75 text-orange-700"
             onClick={handleSignOut}
         >Log Out</Button>
     )
