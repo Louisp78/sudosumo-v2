@@ -7,5 +7,5 @@ export default function ClearLocalStorage() {
         if (localStorage.length > 0)
             localStorage.clear()
     })
-    return null;
+    return null
 }
