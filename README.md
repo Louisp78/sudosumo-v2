@@ -14,4 +14,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Learn More
 
-To learn more about this project. Check the [Sudosumo details](louisplace.com/sudosumo)
+To learn more about this project. Check the [Sudosumo details](https://louisplace.com/sudosumo)
