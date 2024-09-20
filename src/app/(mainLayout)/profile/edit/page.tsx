@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { toast } from "sonner"
 
 export default function EditProfilePage() {
     const router = useRouter()
@@ -26,6 +27,7 @@ export default function EditProfilePage() {
     }, [setUser])
 
     function handleSubmit(data: FormData) {
+        toast('User infos updated !')
         updateUserInfos(data).then(() => router.push('/profile'))
     }
 
