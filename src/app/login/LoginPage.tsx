@@ -1,5 +1,6 @@
 import GoogleSignInBtn from "../components/GoogleSignInBtn"
 import { Card } from "../components/ui/card"
+import ClearLocalStorage from "./ClearLocalStorage"
 
 export default function LoginPage() {
     return (
@@ -14,6 +15,7 @@ export default function LoginPage() {
                     <GoogleSignInBtn />
                 </div>
             </Card>
+            <ClearLocalStorage />
         </main>
     )
 }
