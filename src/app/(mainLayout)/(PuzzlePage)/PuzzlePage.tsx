@@ -12,6 +12,7 @@ import SSButton from '../../components/SSButton'
 import InvalidPuzzleDialog from '../../components/InvalidPuzzleDialog'
 import { loseLife } from '../../service/user'
 import { SudokuDTO } from '../../service/dto/SudokuDTO'
+import PuzzlePageSkeleton from './PuzzlePageSkeleton'
 
 export default function PuzzlePage() {
   const isDev = process.env.NEXT_PUBLIC_ENV! === 'development'
@@ -151,6 +152,8 @@ export default function PuzzlePage() {
     return <GameWinPage onClose={() => {
       puzzleGeneration().then(() => setIsSolved(false))
     }} noodles={iniSudoku?.noodles ?? 0} />
+  if (iniSudoku == null)
+    return <PuzzlePageSkeleton />
 
   return (
     <main className="flex-grow flex flex-col items-center justify-center p-4 md:p-8">

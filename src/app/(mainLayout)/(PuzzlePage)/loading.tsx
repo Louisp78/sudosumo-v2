@@ -1,4 +1,4 @@
-import PuzzlePageSkeleton from './(PuzzlePage)/PuzzlePageSkeleton'
+import PuzzlePageSkeleton from './PuzzlePageSkeleton'
 
 export default function Loading() {
     return <PuzzlePageSkeleton />
