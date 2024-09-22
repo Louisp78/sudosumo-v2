@@ -13,10 +13,13 @@ import InvalidPuzzleDialog from '../../components/InvalidPuzzleDialog'
 import { loseLife } from '../../service/user'
 import { SudokuDTO } from '../../service/dto/SudokuDTO'
 import PuzzlePageSkeleton from './PuzzlePageSkeleton'
+import { Spinner } from '@/components/component/spinner'
+import { SpinnerSolution } from '@/app/components/SpinnerSolution'
 
 export default function PuzzlePage() {
   const isDev = process.env.NEXT_PUBLIC_ENV! === 'development'
 
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [puzzle, setPuzzle] = useState<string[]>(Array(81).fill('-'))
   const setPuzzleWithLocal = (puzzle: string[]) => {
     localStorage.setItem('puzzle', JSON.stringify(puzzle))
@@ -112,12 +115,13 @@ export default function PuzzlePage() {
   // for solve
   useEffect(() => {
     if (!puzzle.includes("-")) {
+      setIsLoading(true)
       solve().then((isSolved) => {
         if (isSolved) {
           localStorage.clear()
         }
         return setIsSolved(isSolved)
-      })
+      }).finally(() => setIsLoading(false))
     }
   }, [puzzle])
 
@@ -179,7 +183,7 @@ export default function PuzzlePage() {
     <main className="flex-grow flex flex-col items-center justify-center p-4 md:p-8">
       <div className="w-full max-w-md mb-8">
         {errorMessage && <p>{errorMessage}</p>}
-        {errorMessage == null &&
+        {errorMessage == null && isLoading === false &&
           (
             <div className="border-4 border-white rounded-lg overflow-hidden shadow-2xl">
               <div className="w-full aspect-square grid grid-cols-9 bg-white bg-opacity-90">
@@ -202,6 +206,7 @@ export default function PuzzlePage() {
             </div>
           )
         }
+        {isLoading && <SpinnerSolution />}
         <h2 className="text-white text-center mt-4 flex items-center justify-center">
           <SoupIcon className="mr-2 text-yellow-300" />
           This puzzle contains {iniSudoku?.noodles} noodles
