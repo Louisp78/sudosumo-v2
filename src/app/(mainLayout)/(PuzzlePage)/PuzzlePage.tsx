@@ -13,7 +13,6 @@ import InvalidPuzzleDialog from '../../components/InvalidPuzzleDialog'
 import { loseLife } from '../../service/user'
 import { SudokuDTO } from '../../service/dto/SudokuDTO'
 import PuzzlePageSkeleton from './PuzzlePageSkeleton'
-import { Spinner } from '@/components/component/spinner'
 import { SpinnerSolution } from '@/app/components/SpinnerSolution'
 
 export default function PuzzlePage() {
