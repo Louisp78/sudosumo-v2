@@ -1,5 +1,6 @@
 "use server"
 
+import { revalidateTag } from "next/cache"
 import { ResponseDTO } from "./dto/ResponseDTO"
 import { SudokuDTO } from "./dto/SudokuDTO"
 import { fetchWrapper } from "./utils"
@@ -26,5 +27,8 @@ export async function solveSudoku(solution: string) {
       solution: solution,
     }),
   })
-  if (response) return { status: response.status }
+  if (response){
+    revalidateTag('user')
+    return { status: response.status }
+  }
 }
