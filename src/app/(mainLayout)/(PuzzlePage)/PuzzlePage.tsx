@@ -45,13 +45,11 @@ export default function PuzzlePage() {
     const response = await getSudoku({ regenerate: "false" })
     if (response) {
       if (response.status === 200) {
-        const sudokuResp = await response.object
-        const sudoku = puzzleFormatToDisplay(sudokuResp.puzzle)
-        const sudokuLocalResp = localStorage.getItem('iniSudoku')
+        const sudokuResp: SudokuDTO = await response.object
+        const sudokuLocalResp: string | null = localStorage.getItem('iniSudoku')
         if (sudokuLocalResp) {
-          const sudokuLocal = JSON.parse(sudokuLocalResp) as SudokuDTO
-          const puzzleLocal = puzzleFormatToDisplay(sudokuLocal.puzzle)
-          return sudoku === puzzleLocal
+          const iniSudokuDto = JSON.parse(sudokuLocalResp) as SudokuDTO
+          return sudokuResp.puzzle === iniSudokuDto.puzzle
         }
       }
     }
@@ -92,12 +90,15 @@ export default function PuzzlePage() {
   useEffect(() => {
     const iniSudokuSto = localStorage.getItem('iniSudoku')
     if (iniSudokuSto) {
-      checkLocalPuzzleValidity().then((isLocalPuzzleValid) => {
-        if (isLocalPuzzleValid)
+      checkLocalPuzzleValidity().then((isValid) => {
+        if (isValid) {
           setIniSudoku(JSON.parse(iniSudokuSto) as SudokuDTO)
-        else
+        } else {
           puzzleGeneration()
+        }
       })
+    } else {
+      puzzleGeneration()
     }
 
     const puzzleSto = localStorage.getItem('puzzle')
